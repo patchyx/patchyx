@@ -1,0 +1,17 @@
+[package]
+name = "pijul-interaction"
+description = "Human friendly input/output (progress bars, passwords etc) for contexts such as terminals or GUIs"
+version.workspace = true
+authors = ["Finchie"]
+edition.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
+pijul-config.workspace = true
+
+dialoguer = { workspace = true, features = ["fuzzy-select", "password"] }
+duplicate.workspace = true
+indicatif.workspace = true
+log.workspace = true
+thiserror.workspace = true

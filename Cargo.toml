@@ -1,0 +1,116 @@
+[workspace]
+members = [
+    "libpijul",
+    "pijul-config",
+    "pijul-identity",
+    "pijul-interaction",
+    "pijul-macros",
+    "pijul-remote",
+    "pijul-repository",
+    "pijul",
+]
+resolver = "3"
+
+[workspace.package]
+version = "1.0.0-beta.11"
+authors = ["Pierre-Étienne Meunier <pe@pijul.org>"]
+edition = "2024"
+repository = "https://nest.pijul.com/pijul/pijul"
+license = "GPL-2.0"
+readme = "README.md"
+
+[workspace.dependencies]
+libpijul = { path = "libpijul", version = "1.0.0-beta.10" }
+pijul-config = { path = "pijul-config", version = "1.0.0-beta.10" }
+pijul-identity = { path = "pijul-identity", version = "1.0.0-beta.10" }
+pijul-interaction = { path = "pijul-interaction", version = "1.0.0-beta.10" }
+pijul-macros = { path = "pijul-macros", version = "1.0.0-beta.10" }
+pijul-remote = { path = "pijul-remote", version = "1.0.0-beta.10" }
+pijul-repository = { path = "pijul-repository", version = "1.0.0-beta.10" }
+
+adler32 = "1.2"
+aes = "0.7"
+anyhow = "1.0"
+bincode = "1.3"
+bitflags = "2.9"
+blake3 = "1.8"
+bs58 = "0.4"
+byteorder = "1.5"
+bytes = "1.10"
+canonical-path = "2.0"
+chardetng = "0.1"
+clap = "4.5"
+clap_complete = "4.5"
+crossbeam-deque = "0.8"
+ctrlc = "3.4"
+curve25519-dalek = "4.1"
+data-encoding = "2.9"
+dialoguer = { version = "0.10", default-features = false }
+diffs = "0.5"
+dirs-next = "2.0"
+duplicate = "2.0"
+ed25519-dalek = "1.0"
+edit = "0.1"
+encoding_rs = "0.8"
+env_logger = "0.11"
+expectrl = "0.7"
+flate2 = "1.1"
+futures = "0.3"
+futures-util = "0.3"
+generic-array = "0.14"
+getrandom = "0.2"
+git2 = "0.20"
+hmac = "0.11"
+human-panic = "2.0"
+hyper = "0.14"
+ignore = "0.4"
+imara-diff = "0.1.8"
+indicatif = { version = "0.17", features = ["improved_unicode"] }
+jiff = { version = "0.2", features = ["serde", "alloc"] }
+keyring = { version = "3.6", default-features = false, features = [
+    "apple-native",
+    "linux-native-sync-persistent",
+    "windows-native",
+] }
+log = "0.4"
+lru-cache = "0.1"
+nom = "7.1"
+open = "5.3"
+pager = "0.16"
+parking_lot = "0.12"
+path-slash = "0.2"
+pbkdf2 = { version = "0.9", default-features = false }
+proc-macro2 = "1.0"
+ptree = { version = "0.5", default-features = false, features = ["ansi"] }
+quickcheck = "1.0"
+quote = "1.0"
+rand = "0.9"
+rand_chacha = "0.9"
+regex = "1.11"
+reqwest = { version = "0.11", features = ["stream", "json"] }
+rlimit = "0.10"
+sanakirja = { version = "2.0.0-beta", default-features = false, features = ["crc32"] }
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"
+sha2 = "0.9"
+syn = "2.0"
+tar = "0.4"
+tempfile = "3.20"
+termcolor = "1.4"
+thiserror = "2.0"
+thrussh = "0.35"
+thrussh-config = "0.6"
+thrussh-keys = "0.22"
+tokio = { version = "1.45", features = [
+    "rt-multi-thread",
+    "macros",
+    "sync",
+    "fs",
+] }
+toml = { version = "0.8", features = ["preserve_order"] }
+twox-hash = "1.6"
+url = "2.5"
+validator = "0.20"
+whoami = { version = "1.6", default-features = false }
+zstd-seekable = "0.1"
