@@ -1,0 +1,31 @@
+[package]
+name = "pijul-identity"
+description = "Functionality to interact with Pijul identities"
+version.workspace = true
+authors = ["Finchie"]
+edition.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[features]
+default = ["openssl"]
+openssl = ["thrussh-keys/openssl"]
+
+[dependencies]
+libpijul.workspace = true
+pijul-config.workspace = true
+
+
+anyhow.workspace = true
+dirs-next.workspace = true
+jiff.workspace = true
+keyring.workspace = true
+log.workspace = true
+serde_derive.workspace = true
+serde_json.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+thrussh-keys.workspace = true
+toml.workspace = true
+validator.workspace = true
+whoami.workspace = true
