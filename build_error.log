@@ -1,0 +1,1370 @@
+    Checking libpijul v1.0.0-beta.11 (/Users/void/Desktop/patchyx/pijul/libpijul)
+error[E0433]: failed to resolve: could not find `distributions` in `rand`
+    --> libpijul/src/apply.rs:1224:32
+     |
+1224 |             .sample_iter(rand::distributions::Standard)
+     |                                ^^^^^^^^^^^^^
+     |                                |
+     |                                could not find `distributions` in `rand`
+     |                                help: a trait with a similar name exists: `Distribution`
+
+error[E0433]: failed to resolve: could not find `distributions` in `rand`
+   --> libpijul/src/key.rs:123:45
+    |
+123 |                         .sample_iter(&rand::distributions::Alphanumeric)
+    |                                             ^^^^^^^^^^^^^
+    |                                             |
+    |                                             could not find `distributions` in `rand`
+    |                                             help: a trait with a similar name exists: `Distribution`
+
+warning: use of deprecated function `rand::thread_rng`: Renamed to `rng`
+   --> libpijul/src/key.rs:105:15
+    |
+105 |         rand::thread_rng().fill_bytes(&mut key);
+    |               ^^^^^^^^^^
+    |
+    = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated function `rand::thread_rng`: Renamed to `rng`
+   --> libpijul/src/key.rs:122:38
+    |
+122 |                     let salt = rand::thread_rng()
+    |                                      ^^^^^^^^^^
+
+warning: use of deprecated function `rand::thread_rng`: Renamed to `rng`
+   --> libpijul/src/tag.rs:287:37
+    |
+287 |                 let mut rng = rand::thread_rng();
+    |                                     ^^^^^^^^^^
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:154:15
+    |
+154 |     txn: &mut MutTxn<()>,
+    |               ^^^^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:154:15
+    |
+154 |     txn: &mut MutTxn<()>,
+    |               ^^^^^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:332:15
+    |
+332 |     txn: &mut crate::pristine::sanakirja::MutTxn<()>,
+    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:332:15
+    |
+332 |     txn: &mut crate::pristine::sanakirja::MutTxn<()>,
+    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/lib.rs:84:6
+    |
+84  | impl MutTxnTExt for pristine::sanakirja::MutTxn<()> {}
+    |      ^^^^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+note: required for `GenericTxn<()>` to implement `pristine::GraphTxnT`
+   --> libpijul/src/pristine/sanakirja.rs:412:84
+    |
+412 | impl<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage> GraphTxnT
+    |         -------------------------------------------------                          ^^^^^^^^^
+    |         |
+    |         unsatisfied trait bound introduced here
+413 |     for GenericTxn<T>
+    |         ^^^^^^^^^^^^^
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/lib.rs:84:6
+    |
+84  | impl MutTxnTExt for pristine::sanakirja::MutTxn<()> {}
+    |      ^^^^^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required for `GenericTxn<()>` to implement `pristine::GraphTxnT`
+   --> libpijul/src/pristine/sanakirja.rs:412:84
+    |
+412 | impl<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage> GraphTxnT
+    |                                                             ---------------------  ^^^^^^^^^
+    |                                                             |
+    |                                                             unsatisfied trait bound introduced here
+413 |     for GenericTxn<T>
+    |         ^^^^^^^^^^^^^
+
+error[E0277]: the trait bound `(): sanakirja::RootPageMut` is not satisfied
+    --> libpijul/src/lib.rs:84:21
+     |
+84   | impl MutTxnTExt for pristine::sanakirja::MutTxn<()> {}
+     |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::RootPageMut` is not implemented for `()`
+     |
+     = help: the trait `sanakirja::RootPageMut` is implemented for `sanakirja::MutTxn<E>`
+note: required for `GenericTxn<()>` to implement `pristine::TreeMutTxnT`
+    --> libpijul/src/pristine/sanakirja.rs:1958:7
+     |
+1956 |             + sanakirja::RootPageMut
+     |               ---------------------- unsatisfied trait bound introduced here
+1957 |             + sanakirja::LoadPage<Error = ::sanakirja::Error>,
+1958 |     > TreeMutTxnT for MutTxn<T>
+     |       ^^^^^^^^^^^     ^^^^^^^^^
+note: required for `GenericTxn<()>` to implement `pristine::MutTxnT`
+    --> libpijul/src/pristine/mod.rs:1747:11
+     |
+1747 | pub trait MutTxnT:
+     |           ^^^^^^^
+note: required by a bound in `MutTxnTExt`
+    --> libpijul/src/lib.rs:99:23
+     |
+99   | pub trait MutTxnTExt: pristine::MutTxnT {
+     |                       ^^^^^^^^^^^^^^^^^ required by this bound in `MutTxnTExt`
+
+error[E0277]: the trait bound `(): sanakirja::AllocPage` is not satisfied
+    --> libpijul/src/lib.rs:84:21
+     |
+84   | impl MutTxnTExt for pristine::sanakirja::MutTxn<()> {}
+     |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::AllocPage` is not implemented for `()`
+     |
+     = help: the following other types implement trait `sanakirja::AllocPage`:
+               sanakirja::MutTxn<E>
+               sanakirja::environment::muttxn::SubTxn<E, T>
+note: required for `GenericTxn<()>` to implement `pristine::TreeMutTxnT`
+    --> libpijul/src/pristine/sanakirja.rs:1958:7
+     |
+1955 |         T: sanakirja::AllocPage<Error = ::sanakirja::Error>
+     |            ------------------------------------------------ unsatisfied trait bound introduced here
+...
+1958 |     > TreeMutTxnT for MutTxn<T>
+     |       ^^^^^^^^^^^     ^^^^^^^^^
+note: required for `GenericTxn<()>` to implement `pristine::MutTxnT`
+    --> libpijul/src/pristine/mod.rs:1747:11
+     |
+1747 | pub trait MutTxnT:
+     |           ^^^^^^^
+note: required by a bound in `MutTxnTExt`
+    --> libpijul/src/lib.rs:99:23
+     |
+99   | pub trait MutTxnTExt: pristine::MutTxnT {
+     |                       ^^^^^^^^^^^^^^^^^ required by this bound in `MutTxnTExt`
+
+error[E0277]: the trait bound `(): sanakirja::Commit` is not satisfied
+    --> libpijul/src/lib.rs:84:21
+     |
+84   | impl MutTxnTExt for pristine::sanakirja::MutTxn<()> {}
+     |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::Commit` is not implemented for `()`
+     |
+     = help: the following other types implement trait `sanakirja::Commit`:
+               sanakirja::MutTxn<E>
+               sanakirja::environment::muttxn::SubTxn<E, sanakirja::MutTxn<E>>
+note: required for `()` to implement `RawMutTxnT`
+    --> libpijul/src/pristine/sanakirja.rs:284:7
+     |
+282  |             + ::sanakirja::Commit
+     |               ------------------- unsatisfied trait bound introduced here
+283  |             + ::sanakirja::LoadPage<Error = ::sanakirja::Error>,
+284  |     > RawMutTxnT for T
+     |       ^^^^^^^^^^     ^
+note: required for `GenericTxn<()>` to implement `pristine::MutTxnT`
+    --> libpijul/src/pristine/sanakirja.rs:1985:21
+     |
+1985 | impl<T: RawMutTxnT> MutTxnT for MutTxn<T> {
+     |         ----------  ^^^^^^^     ^^^^^^^^^
+     |         |
+     |         unsatisfied trait bound introduced here
+note: required by a bound in `MutTxnTExt`
+    --> libpijul/src/lib.rs:99:23
+     |
+99   | pub trait MutTxnTExt: pristine::MutTxnT {
+     |                       ^^^^^^^^^^^^^^^^^ required by this bound in `MutTxnTExt`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/lib.rs:85:6
+    |
+85  | impl TxnTExt for pristine::sanakirja::MutTxn<()> {}
+    |      ^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+note: required for `GenericTxn<()>` to implement `pristine::GraphTxnT`
+   --> libpijul/src/pristine/sanakirja.rs:412:84
+    |
+412 | impl<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage> GraphTxnT
+    |         -------------------------------------------------                          ^^^^^^^^^
+    |         |
+    |         unsatisfied trait bound introduced here
+413 |     for GenericTxn<T>
+    |         ^^^^^^^^^^^^^
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/lib.rs:85:6
+    |
+85  | impl TxnTExt for pristine::sanakirja::MutTxn<()> {}
+    |      ^^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required for `GenericTxn<()>` to implement `pristine::GraphTxnT`
+   --> libpijul/src/pristine/sanakirja.rs:412:84
+    |
+412 | impl<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage> GraphTxnT
+    |                                                             ---------------------  ^^^^^^^^^
+    |                                                             |
+    |                                                             unsatisfied trait bound introduced here
+413 |     for GenericTxn<T>
+    |         ^^^^^^^^^^^^^
+
+error[E0599]: no method named `decompress` found for enum `Result` in the current scope
+   --> libpijul/src/pristine/merkle.rs:109:14
+    |
+108 | /         curve25519_dalek::edwards::CompressedEdwardsY::from_slice(&bytes[..32])
+109 | |             .decompress()
+    | |             -^^^^^^^^^^ method not found in `Result<CompressedEdwardsY, TryFromSliceError>`
+    | |_____________|
+    |
+    |
+note: the method `decompress` exists on the type `CompressedEdwardsY`
+   --> /Users/void/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/curve25519-dalek-4.1.3/src/edwards.rs:194:5
+    |
+194 |     pub fn decompress(&self) -> Option<EdwardsPoint> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider using `Result::expect` to unwrap the `CompressedEdwardsY` value, panicking if the value is a `Result::Err`
+    |
+108 |         curve25519_dalek::edwards::CompressedEdwardsY::from_slice(&bytes[..32]).expect("REASON")
+    |                                                                                +++++++++++++++++
+
+error[E0599]: no method named `decompress` found for enum `Result` in the current scope
+   --> libpijul/src/pristine/merkle.rs:135:18
+    |
+134 | /             curve25519_dalek::edwards::CompressedEdwardsY::from_slice(&bytes[..32])
+135 | |                 .decompress()
+    | |                 -^^^^^^^^^^ method not found in `Result<CompressedEdwardsY, TryFromSliceError>`
+    | |_________________|
+    |
+    |
+note: the method `decompress` exists on the type `CompressedEdwardsY`
+   --> /Users/void/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/curve25519-dalek-4.1.3/src/edwards.rs:194:5
+    |
+194 |     pub fn decompress(&self) -> Option<EdwardsPoint> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider using `Result::expect` to unwrap the `CompressedEdwardsY` value, panicking if the value is a `Result::Err`
+    |
+134 |             curve25519_dalek::edwards::CompressedEdwardsY::from_slice(&bytes[..32]).expect("REASON")
+    |                                                                                    +++++++++++++++++
+
+error[E0599]: no method named `decompress` found for enum `Result` in the current scope
+   --> libpijul/src/pristine/merkle.rs:211:18
+    |
+210 | /             curve25519_dalek::edwards::CompressedEdwardsY::from_slice(&(m.0)[1..])
+211 | |                 .decompress()
+    | |                 -^^^^^^^^^^ method not found in `Result<CompressedEdwardsY, TryFromSliceError>`
+    | |_________________|
+    |
+    |
+note: the method `decompress` exists on the type `CompressedEdwardsY`
+   --> /Users/void/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/curve25519-dalek-4.1.3/src/edwards.rs:194:5
+    |
+194 |     pub fn decompress(&self) -> Option<EdwardsPoint> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider using `Result::expect` to unwrap the `CompressedEdwardsY` value, panicking if the value is a `Result::Err`
+    |
+210 |             curve25519_dalek::edwards::CompressedEdwardsY::from_slice(&(m.0)[1..]).expect("REASON")
+    |                                                                                   +++++++++++++++++
+
+error[E0599]: no method named `decompress` found for enum `Result` in the current scope
+   --> libpijul/src/pristine/merkle.rs:222:18
+    |
+221 | /             curve25519_dalek::edwards::CompressedEdwardsY::from_slice(&(m.0)[1..])
+222 | |                 .decompress()
+    | |                 -^^^^^^^^^^ method not found in `Result<CompressedEdwardsY, TryFromSliceError>`
+    | |_________________|
+    |
+    |
+note: the method `decompress` exists on the type `CompressedEdwardsY`
+   --> /Users/void/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/curve25519-dalek-4.1.3/src/edwards.rs:194:5
+    |
+194 |     pub fn decompress(&self) -> Option<EdwardsPoint> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider using `Result::expect` to unwrap the `CompressedEdwardsY` value, panicking if the value is a `Result::Err`
+    |
+221 |             curve25519_dalek::edwards::CompressedEdwardsY::from_slice(&(m.0)[1..]).expect("REASON")
+    |                                                                                   +++++++++++++++++
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:157:5
+    |
+157 |     tag.file.seek(SeekFrom::Start(tag.header.channel))?;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:157:5
+    |
+157 |     tag.file.seek(SeekFrom::Start(tag.header.channel))?;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:160:5
+    |
+160 |     tag.file.read_exact(&mut comp)?;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:160:5
+    |
+160 |     tag.file.read_exact(&mut comp)?;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:164:5
+    |
+164 |     zstd_seekable::Seekable::init_buf(&comp)?
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:164:5
+    |
+164 |     zstd_seekable::Seekable::init_buf(&comp)?
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:179:9
+    |
+179 |         txn,
+    |         ^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:179:9
+    |
+179 |         txn,
+    |         ^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:181:20
+    |
+181 |         |file_txn, txn, k: &Vertex<ChangeId>, v: &SerializedEdge| {
+    |                    ^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:181:20
+    |
+181 |         |file_txn, txn, k: &Vertex<ChangeId>, v: &SerializedEdge| {
+    |                    ^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:177:17
+    |
+177 |       let graph = restore(
+    |  _________________^
+178 | |         &filetxn,
+179 | |         txn,
+180 | |         tag.header.offsets.graph,
+...   |
+224 | |         },
+225 | |     )?;
+    | |______^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:177:17
+    |
+177 |       let graph = restore(
+    |  _________________^
+178 | |         &filetxn,
+179 | |         txn,
+180 | |         tag.header.offsets.graph,
+...   |
+224 | |         },
+225 | |     )?;
+    | |______^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:230:9
+    |
+230 |         txn,
+    |         ^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:230:9
+    |
+230 |         txn,
+    |         ^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:232:20
+    |
+232 |         |file_txn, txn, k: &ChangeId, v: &L64| {
+    |                    ^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:232:20
+    |
+232 |         |file_txn, txn, k: &ChangeId, v: &L64| {
+    |                    ^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:228:19
+    |
+228 |       let changes = restore(
+    |  ___________________^
+229 | |         &filetxn,
+230 | |         txn,
+231 | |         tag.header.offsets.changes,
+...   |
+237 | |         },
+238 | |     )?;
+    | |______^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:228:19
+    |
+228 |       let changes = restore(
+    |  ___________________^
+229 | |         &filetxn,
+230 | |         txn,
+231 | |         tag.header.offsets.changes,
+...   |
+237 | |         },
+238 | |     )?;
+    | |______^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:243:9
+    |
+243 |         txn,
+    |         ^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:243:9
+    |
+243 |         txn,
+    |         ^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:245:20
+    |
+245 |         |file_txn, txn, k: &L64, v: &Pair<ChangeId, SerializedMerkle>| {
+    |                    ^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:245:20
+    |
+245 |         |file_txn, txn, k: &L64, v: &Pair<ChangeId, SerializedMerkle>| {
+    |                    ^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:241:22
+    |
+241 |       let revchanges = restore(
+    |  ______________________^
+242 | |         &filetxn,
+243 | |         txn,
+244 | |         tag.header.offsets.revchanges,
+...   |
+256 | |         },
+257 | |     )?;
+    | |______^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:241:22
+    |
+241 |       let revchanges = restore(
+    |  ______________________^
+242 | |         &filetxn,
+243 | |         txn,
+244 | |         tag.header.offsets.revchanges,
+...   |
+256 | |         },
+257 | |     )?;
+    | |______^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:262:9
+    |
+262 |         txn,
+    |         ^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:262:9
+    |
+262 |         txn,
+    |         ^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:264:13
+    |
+264 |         |_, _, k: &SerializedMerkle, v: &L64| Ok((k.clone(), *v)),
+    |             ^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:264:13
+    |
+264 |         |_, _, k: &SerializedMerkle, v: &L64| Ok((k.clone(), *v)),
+    |             ^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:260:18
+    |
+260 |       let states = restore(
+    |  __________________^
+261 | |         &filetxn,
+262 | |         txn,
+263 | |         tag.header.offsets.states,
+264 | |         |_, _, k: &SerializedMerkle, v: &L64| Ok((k.clone(), *v)),
+265 | |     )?;
+    | |______^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:260:18
+    |
+260 |       let states = restore(
+    |  __________________^
+261 | |         &filetxn,
+262 | |         txn,
+263 | |         tag.header.offsets.states,
+264 | |         |_, _, k: &SerializedMerkle, v: &L64| Ok((k.clone(), *v)),
+265 | |     )?;
+    | |______^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:270:9
+    |
+270 |         txn,
+    |         ^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:270:9
+    |
+270 |         txn,
+    |         ^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:272:13
+    |
+272 |         |_, _, k: &L64, v: &Pair<SerializedMerkle, SerializedMerkle>| Ok((*k, *v)),
+    |             ^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:272:13
+    |
+272 |         |_, _, k: &L64, v: &Pair<SerializedMerkle, SerializedMerkle>| Ok((*k, *v)),
+    |             ^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:268:16
+    |
+268 |       let tags = restore(
+    |  ________________^
+269 | |         &filetxn,
+270 | |         txn,
+271 | |         tag.header.offsets.tags,
+272 | |         |_, _, k: &L64, v: &Pair<SerializedMerkle, SerializedMerkle>| Ok((*k, *v)),
+273 | |     )?;
+    | |______^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:268:16
+    |
+268 |       let tags = restore(
+    |  ________________^
+269 | |         &filetxn,
+270 | |         txn,
+271 | |         tag.header.offsets.tags,
+272 | |         |_, _, k: &L64, v: &Pair<SerializedMerkle, SerializedMerkle>| Ok((*k, *v)),
+273 | |     )?;
+    | |______^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+warning: use of deprecated method `rand::Rng::gen`: Renamed to `random` to avoid conflict with the new `gen` keyword in Rust 2024.
+   --> libpijul/src/tag.rs:291:30
+    |
+291 |                     *m = rng.gen()
+    |                              ^^^
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:297:5
+    |
+297 |     txn.open_channels.lock().insert(name, br.clone());
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:297:5
+    |
+297 |     txn.open_channels.lock().insert(name, br.clone());
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:297:5
+    |
+297 |     txn.open_channels.lock().insert(name, br.clone());
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:297:5
+    |
+297 |     txn.open_channels.lock().insert(name, br.clone());
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:276:14
+    |
+276 |     let br = ChannelRef {
+    |              ^^^^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required for `GenericTxn<()>` to implement `pristine::ChannelTxnT`
+   --> libpijul/src/pristine/sanakirja.rs:773:84
+    |
+773 | impl<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage> ChannelTxnT
+    |         -------------------------------------------------                          ^^^^^^^^^^^
+    |         |
+    |         unsatisfied trait bound introduced here
+774 |     for GenericTxn<T>
+    |         ^^^^^^^^^^^^^
+note: required by a bound in `pristine::ChannelRef`
+   --> libpijul/src/pristine/mod.rs:74:26
+    |
+74  | pub struct ChannelRef<T: ChannelTxnT> {
+    |                          ^^^^^^^^^^^ required by this bound in `ChannelRef`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:276:14
+    |
+276 |     let br = ChannelRef {
+    |              ^^^^^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required for `GenericTxn<()>` to implement `pristine::ChannelTxnT`
+   --> libpijul/src/pristine/sanakirja.rs:773:84
+    |
+773 | impl<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage> ChannelTxnT
+    |                                                             ---------------------  ^^^^^^^^^^^
+    |                                                             |
+    |                                                             unsatisfied trait bound introduced here
+774 |     for GenericTxn<T>
+    |         ^^^^^^^^^^^^^
+note: required by a bound in `pristine::ChannelRef`
+   --> libpijul/src/pristine/mod.rs:74:26
+    |
+74  | pub struct ChannelRef<T: ChannelTxnT> {
+    |                          ^^^^^^^^^^^ required by this bound in `ChannelRef`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:298:5
+    |
+298 |     Ok(br)
+    |     ^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:298:5
+    |
+298 |     Ok(br)
+    |     ^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:298:5
+    |
+298 |     Ok(br)
+    |     ^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:298:5
+    |
+298 |     Ok(br)
+    |     ^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:190:29
+    |
+190 |                     change: crate::pristine::make_changeid(txn, &h.into())?,
+    |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required for `GenericTxn<()>` to implement `pristine::GraphTxnT`
+   --> libpijul/src/pristine/sanakirja.rs:412:84
+    |
+412 | impl<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage> GraphTxnT
+    |         -------------------------------------------------                          ^^^^^^^^^
+    |         |
+    |         unsatisfied trait bound introduced here
+413 |     for GenericTxn<T>
+    |         ^^^^^^^^^^^^^
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:190:29
+    |
+190 |                     change: crate::pristine::make_changeid(txn, &h.into())?,
+    |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required for `GenericTxn<()>` to implement `pristine::GraphTxnT`
+   --> libpijul/src/pristine/sanakirja.rs:412:84
+    |
+412 | impl<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage> GraphTxnT
+    |                                                             ---------------------  ^^^^^^^^^
+    |                                                             |
+    |                                                             unsatisfied trait bound introduced here
+413 |     for GenericTxn<T>
+    |         ^^^^^^^^^^^^^
+
+error[E0599]: no method named `alloc_page` found for unit type `()` in the current scope
+   --> libpijul/src/tag.rs:346:33
+    |
+346 |     let page = unsafe { txn.txn.alloc_page()? };
+    |                                 ^^^^^^^^^^ method not found in `()`
+
+error[E0599]: no method named `alloc_page` found for unit type `()` in the current scope
+   --> libpijul/src/tag.rs:362:40
+    |
+362 |                 let new_page = txn.txn.alloc_page()?;
+    |                                        ^^^^^^^^^^ method not found in `()`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:368:47
+    |
+368 |         while let Some((k_, v_, r)) = P::next(&txn.txn, page.as_page(), &mut curs) {
+    |                                       ------- ^^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |                                       |
+    |                                       required by a bound introduced by this call
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `sanakirja::btree::BTreePage::next`
+   --> /Users/void/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sanakirja-core-2.0.0-beta/src/btree/mod.rs:63:20
+    |
+63  |     fn next<'b, T: LoadPage>(
+    |                    ^^^^^^^^ required by this bound in `BTreePage::next`
+
+error[E0277]: the trait bound `(): sanakirja::LoadPage` is not satisfied
+   --> libpijul/src/tag.rs:369:26
+    |
+369 |             let (k, v) = f(file_txn, txn, k_, v_)?;
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::LoadPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::LoadPage`:
+              CopyTxn
+              TagTxn
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+              tag::Txn<'a>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:26
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0277]: the trait bound `(): sanakirja::RootPage` is not satisfied
+   --> libpijul/src/tag.rs:369:26
+    |
+369 |             let (k, v) = f(file_txn, txn, k_, v_)?;
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^ the trait `sanakirja::RootPage` is not implemented for `()`
+    |
+    = help: the following other types implement trait `sanakirja::RootPage`:
+              sanakirja::MutTxn<E>
+              sanakirja::Txn<E>
+note: required by a bound in `GenericTxn`
+   --> libpijul/src/pristine/sanakirja.rs:296:78
+    |
+296 | pub struct GenericTxn<T: ::sanakirja::LoadPage<Error = ::sanakirja::Error> + ::sanakirja::RootPage>
+    |                                                                              ^^^^^^^^^^^^^^^^^^^^^ required by this bound in `GenericTxn`
+
+error[E0599]: no method named `alloc_page` found for unit type `()` in the current scope
+   --> libpijul/src/tag.rs:374:49
+    |
+374 |                 let new_page = unsafe { txn.txn.alloc_page()? };
+    |                                                 ^^^^^^^^^^ method not found in `()`
+
+error[E0277]: the trait bound `(): sanakirja::AllocPage` is not satisfied
+   --> libpijul/src/tag.rs:381:33
+    |
+381 |             unsafe { P::put_mut(&mut txn.txn, &mut new_page_, &mut new_curs, &k, &v, r) }
+    |                      ---------- ^^^^^^^^^^^^ the trait `sanakirja::AllocPage` is not implemented for `()`
+    |                      |
+    |                      required by a bound introduced by this call
+    |
+    = help: the following other types implement trait `sanakirja::AllocPage`:
+              CopyTxn
+              sanakirja::MutTxn<E>
+              sanakirja::environment::muttxn::SubTxn<E, T>
+note: required by a bound in `put_mut`
+   --> /Users/void/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sanakirja-core-2.0.0-beta/src/btree/mod.rs:184:26
+    |
+184 |     unsafe fn put_mut<T: AllocPage>(
+    |                          ^^^^^^^^^ required by this bound in `BTreeMutPage::put_mut`
+
+warning: unused variable: `src`
+   --> libpijul/src/working_copy/filesystem.rs:490:13
+    |
+490 |         let src = std::fs::metadata(&p)?;
+    |             ^^^ help: if this is intentional, prefix it with an underscore: `_src`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `time`
+  --> libpijul/src/working_copy/mod.rs:51:34
+   |
+51 |     fn touch(&self, _name: &str, time: std::time::SystemTime) -> Result<(), Self::Error> {
+   |                                  ^^^^ help: if this is intentional, prefix it with an underscore: `_time`
+
+Some errors have detailed explanations: E0277, E0433, E0599.
+For more information about an error, try `rustc --explain E0277`.
+warning: `libpijul` (lib) generated 6 warnings
+error: could not compile `libpijul` (lib) due to 72 previous errors; 6 warnings emitted

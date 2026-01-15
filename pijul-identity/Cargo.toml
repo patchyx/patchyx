@@ -14,7 +14,7 @@ openssl = ["thrussh-keys/openssl"]
 [dependencies]
 libpijul.workspace = true
 pijul-config.workspace = true
-pijul-interaction.workspace = true
+
 
 anyhow.workspace = true
 dirs-next.workspace = true

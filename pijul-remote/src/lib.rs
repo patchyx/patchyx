@@ -26,9 +26,25 @@ use local::*;
 pub mod http;
 use http::*;
 
-use pijul_interaction::{
-    APPLY_MESSAGE, COMPLETE_MESSAGE, DOWNLOAD_MESSAGE, ProgressBar, Spinner, UPLOAD_MESSAGE,
-};
+mod interaction {
+    #[derive(Clone)]
+    pub struct ProgressBar;
+    impl ProgressBar {
+        pub fn new(_: u64, _: &str) -> anyhow::Result<Self> { Ok(Self) }
+        pub fn inc(&self, _: u64) {}
+        pub fn finish(&self) {}
+    }
+    pub struct Spinner;
+    impl Spinner {
+        pub fn new(_: &str) -> anyhow::Result<Self> { Ok(Self) }
+        pub fn finish(&self) {}
+    }
+    pub const APPLY_MESSAGE: &str = "Applying";
+    pub const COMPLETE_MESSAGE: &str = "Completing";
+    pub const DOWNLOAD_MESSAGE: &str = "Downloading";
+    pub const UPLOAD_MESSAGE: &str = "Uploading";
+}
+use interaction::*;
 
 pub const PROTOCOL_VERSION: usize = 3;
 

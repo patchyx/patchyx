@@ -1,121 +1,164 @@
-# Pijul
+# Patchyx - Pijul Cloud Platform
 
-> A distributed version control system based on a sound mathematical theory of asynchronous work.
+> A cloud platform for hosting Pijul repositories, similar to GitHub but for Pijul VCS.
 
-Pijul is a version control system that focuses on **changes** (patches) rather than snapshots. It solves many strict limitations of Git by modeling development history as a graph of changes that can be applied in any valid order. This commutativity makes merging easy and conflicts a solved problem.
+[![License: GPL-2.0](https://img.shields.io/badge/License-GPL%202.0-blue.svg)](LICENSE)
 
-## Why Pijul?
+## Overview
 
-- **Conflict Resolution**: Conflicts are first-class citizens. Once you resolve a conflict, that resolution is recorded. If others encounter the same conflict, Pijul applies your resolution automatically. You never resolve the same conflict twice.
-- **Commutativity**: Independent changes commute. You can cherry-pick any change from any branch without dragging along the entire history that led effectively to it.
-- **Speed**: Pijul is written in Rust and optimized for performance, handling large repositories efficiently.
-- **Channels**: Instead of branches, Pijul uses channels. Channels are simply different views into the same graph of changes.
+Patchyx is a self-hosted platform for Pijul repositories, providing:
 
-## How Pijul Works
+- **SSH Protocol Gateway** - Push and pull over SSH (`pijul push/pull`)
+- **HTTP REST API** - Repository management and web UI backend
+- **Multi-Repository Hosting** - Host unlimited Pijul repos
 
-At its core, Pijul manages a **Directed Acyclic Graph (DAG)** of changes. When you modify your code:
-
-1.  **Diff**: Pijul compares your working copy against the pristine internal state.
-2.  **Record**: It generates a unique, immutable "Change" object representing your edits.
-3.  **Apply**: This change is added to the graph.
-
-Because changes are associative, the order in which you and your colleagues apply non-conflicting changes doesn't matter. The final state of the repository will be the same.
-
-### The Flow of Change
-
-Here is a visualization of how changes move through Pijul:
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor User
-    participant WC as Working Copy
-    participant Pijul as Pijul Engine
-    participant Repo as Local Repository
-    participant Remote as Remote Repository
-
-    User->>WC: Edit files
-    User->>Pijul: pijul record
-    Pijul->>WC: Scan changes
-    Pijul->>Repo: Compare with Pristine
-    Pijul->>User: Prompt for change details
-    User->>Pijul: Confirm
-    Pijul->>Repo: Write Change Hash & Update Graph
-    Note over Repo: Change is now immutable
-
-    User->>Pijul: pijul push user@host:repo
-    Pijul->>Repo: Read Changes
-    Pijul->>Remote: Send missing changes
-    Remote->>Remote: Apply changes to Graph
-```
-
-## Installation
-
-### Via Cargo (Rust)
-
-```bash
-cargo install pijul --version "~1.0.0-beta"
-```
+Built on top of the core Pijul libraries (`libpijul`, `pijul-remote`, etc.).
 
 ## Quick Start
 
-### Create a Repository
-
 ```bash
-pijul init
+# Build the server
+cargo build -p patchyx-server
+
+# Run with defaults (SSH:2222, HTTP:3000)
+./target/debug/patchyx-server
+
+# Or configure via environment
+PATCHYX_SSH_PORT=22 PATCHYX_HTTP_PORT=80 ./target/debug/patchyx-server
 ```
 
-### Tracking Files
+## Configuration
 
-Add files to be tracked:
+| Environment Variable    | Default    | Description                  |
+| ----------------------- | ---------- | ---------------------------- |
+| `PATCHYX_SSH_HOST`      | 0.0.0.0    | SSH bind address             |
+| `PATCHYX_SSH_PORT`      | 2222       | SSH port                     |
+| `PATCHYX_HTTP_HOST`     | 127.0.0.1  | HTTP bind address            |
+| `PATCHYX_HTTP_PORT`     | 3000       | HTTP port                    |
+| `PATCHYX_REPOS_DIR`     | ./repos    | Repository storage directory |
+| `PATCHYX_HOST_KEY_PATH` | ./host_key | SSH host key file            |
+| `PATCHYX_LOG_LEVEL`     | info       | Logging level                |
 
-```bash
-pijul add <file>
+## Project Structure
+
+```
+pijul/
+├── libpijul/           # Core Pijul library
+├── pijul-config/       # Configuration handling
+├── pijul-identity/     # Identity management
+├── pijul-remote/       # Remote protocol handling
+├── pijul-repository/   # Repository utilities
+├── pijul-macros/       # Procedural macros
+└── patchyx-server/     # 🚀 Cloud server (this project)
+    ├── src/
+    │   ├── main.rs     # Entry point
+    │   ├── config.rs   # Configuration
+    │   ├── error.rs    # Error types
+    │   ├── ssh/        # SSH protocol
+    │   └── http/       # REST API
+    └── Cargo.toml
 ```
 
-### Recording Changes
+## Roadmap
 
-Save your changes to the repository history:
+### ✅ Completed
 
-```bash
-pijul record
-```
+- [x] Project cleanup (removed CLI, refactored dependencies)
+- [x] Server scaffold with SSH and HTTP
+- [x] Environment-based configuration
+- [x] Custom error types
+- [x] Structured logging
+- [x] Pijul command parsing (clone/pull/push/ping)
+- [x] Health check and repo listing endpoints
+- [x] Graceful shutdown
 
-### Viewing History
+### 🔄 In Progress
 
-See the log of changes:
+- [ ] Fix `libpijul` compilation (sanakirja dependency issue)
+- [ ] Integrate `libpijul::Pristine` for repository operations
 
-```bash
-pijul log
-```
+### 📋 TODO
 
-### Working with Remotes
+- [ ] **Authentication**
 
-Clone a repository:
+  - [ ] SSH public key verification against user database
+  - [ ] HTTP API token authentication
+  - [ ] OAuth2 integration (GitHub, GitLab)
 
-```bash
-pijul clone https://nest.pijul.com/pijul/pijul
-```
+- [ ] **Repository Management**
 
-Push your changes:
+  - [ ] Create/delete repositories
+  - [ ] Access control (public/private)
+  - [ ] Channel browsing
+  - [ ] Change history viewing
 
-```bash
-pijul push user@nest.pijul.com:repository
-```
+- [ ] **Protocol Implementation**
+
+  - [ ] Full `pijul clone` over SSH
+  - [ ] Full `pijul push` with change application
+  - [ ] Full `pijul pull` with change streaming
+
+- [ ] **Web Interface**
+
+  - [ ] Repository browser UI
+  - [ ] File content viewer (reconstruct from patches)
+  - [ ] Change diff viewer
+  - [ ] User dashboard
+
+- [ ] **Database Integration**
+
+  - [ ] PostgreSQL for user/repo metadata
+  - [ ] User registration and management
+  - [ ] Repository permissions
+
+- [ ] **DevOps**
+  - [ ] Docker containerization
+  - [ ] Kubernetes deployment manifests
+  - [ ] CI/CD pipeline
+
+## Known Issues
+
+### `libpijul` Compilation Error
+
+The `sanakirja` database library (version 2.0.0-beta) has dependency resolution issues. The crate on crates.io appears incompatible with `libpijul` beta.11.
+
+**Workarounds being explored:**
+
+1. Patch `sanakirja` from git source
+2. Vendor a working version
+3. Wait for upstream fix
+
+## API Endpoints
+
+| Method | Endpoint        | Description       |
+| ------ | --------------- | ----------------- |
+| GET    | `/`             | Server info       |
+| GET    | `/health`       | Health check      |
+| GET    | `/api/v1/repos` | List repositories |
 
 ## Contributing
 
-We welcome all contributions! Pijul is a community-driven project. We value mutual respect and inclusiveness.
+Contributions welcome! This is a work in progress.
 
-Since this is a Rust project, please ensure your code is formatted before recording changes. You can set up a hook to do this automatically:
+```bash
+# Format code
+cargo fmt
 
-**`.pijul/config`**:
+# Run checks
+cargo check -p patchyx-server
 
-```toml
-[hooks]
-record = [ "cargo fmt" ]
+# Run tests (when available)
+cargo test -p patchyx-server
 ```
 
 ## License
 
-GPL-2.0
+GPL-2.0 (inherited from Pijul)
+
+---
+
+## About Pijul
+
+Pijul is a distributed VCS based on a mathematical theory of patches. Unlike Git's snapshot model, Pijul models history as a DAG of commutative changes. This makes merging trivial and conflict resolution persistent.
+
+Learn more: [pijul.org](https://pijul.org)

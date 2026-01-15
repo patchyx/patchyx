@@ -53,7 +53,7 @@ use std::sync::OnceLock;
 
 use jiff::Timestamp;
 use libpijul::key::{PublicKey, SKey, SecretKey};
-use pijul_interaction::Password;
+
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
@@ -134,14 +134,7 @@ impl Credentials {
                 password_attempt = password;
             }
 
-            // Re-prompt as long as the password doesn't work
-            while self.secret_key.load(Some(&password_attempt)).is_err() {
-                writeln!(stderr, "Password does not match secret key")?;
-
-                password_attempt = Password::new()?
-                    .with_prompt("Password for secret key")
-                    .with_allow_empty(true)
-                    .interact()?;
+                return Err(anyhow::anyhow!("Password required for secret key"));
             }
 
             // Update the password
@@ -256,6 +249,10 @@ impl Complete {
     }
 
     fn change_password(&mut self) -> Result<(), anyhow::Error> {
+        // HEADLESS MODE: Interactive password change is not supported.
+        return Err(anyhow::anyhow!("Interactive password change not supported in server mode"));
+
+        /*
         let (decryped_key, _) = self.decrypt()?;
 
         let user_password = Password::new()?
@@ -263,6 +260,7 @@ impl Complete {
             .with_allow_empty(true)
             .with_confirmation("Confirm password", "Password mismatch")
             .interact()?;
+        */
 
         let password = if user_password.is_empty() {
             OnceLock::new()

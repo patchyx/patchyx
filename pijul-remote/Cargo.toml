@@ -14,9 +14,6 @@ openssl = ["thrussh-keys/openssl", "thrussh/openssl"]
 [dependencies]
 libpijul = { workspace = true, features = [ "tarball" ] }
 pijul-config.workspace = true
-pijul-identity.workspace = true
-pijul-interaction.workspace = true
-pijul-repository.workspace = true
 
 anyhow.workspace = true
 byteorder.workspace = true

@@ -1,0 +1,52 @@
+[package]
+name = "patchyx-server"
+version = "0.1.0"
+edition = "2021"
+description = "A production-grade server for hosting Pijul repositories"
+license = "GPL-2.0"
+authors = ["Patchyx Contributors"]
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "patchyx-server"
+path = "src/main.rs"
+
+[dependencies]
+# Async runtime
+tokio = { workspace = true, features = ["full", "signal"] }
+
+# HTTP framework
+axum = { version = "0.7", features = ["macros"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["trace", "cors"] }
+
+# SSH framework
+thrussh = { workspace = true }
+thrussh-keys = { workspace = true }
+
+# Serialization
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+
+# Error handling
+anyhow = { workspace = true }
+thiserror = "2.0"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+log = { workspace = true }
+
+# Async utilities
+futures = { workspace = true }
+
+# Pijul core (for future integration when it compiles)
+# libpijul = { workspace = true, features = ["ondisk-repos", "tarball", "text-changes"] }
+# pijul-remote = { workspace = true }
+# pijul-config = { workspace = true }
+# pijul-repository = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

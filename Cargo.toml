@@ -3,11 +3,10 @@ members = [
     "libpijul",
     "pijul-config",
     "pijul-identity",
-    "pijul-interaction",
     "pijul-macros",
     "pijul-remote",
     "pijul-repository",
-    "pijul",
+    "patchyx-server",
 ]
 resolver = "3"
 
@@ -23,7 +22,6 @@ readme = "README.md"
 libpijul = { path = "libpijul", version = "1.0.0-beta.10" }
 pijul-config = { path = "pijul-config", version = "1.0.0-beta.10" }
 pijul-identity = { path = "pijul-identity", version = "1.0.0-beta.10" }
-pijul-interaction = { path = "pijul-interaction", version = "1.0.0-beta.10" }
 pijul-macros = { path = "pijul-macros", version = "1.0.0-beta.10" }
 pijul-remote = { path = "pijul-remote", version = "1.0.0-beta.10" }
 pijul-repository = { path = "pijul-repository", version = "1.0.0-beta.10" }
@@ -89,7 +87,7 @@ rand_chacha = "0.9"
 regex = "1.11"
 reqwest = { version = "0.11", features = ["stream", "json"] }
 rlimit = "0.10"
-sanakirja = { version = "2.0.0-beta", default-features = false, features = ["crc32"] }
+sanakirja = { version = "2.0.0-beta", default-features = false, features = ["crc32", "mmap", "std"] }
 serde = "1.0"
 serde_derive = "1.0"
 serde_json = "1.0"
